@@ -1,0 +1,3 @@
+include ':recycler_binding'
+include ':recycler-binding-sample'
+rootProject.name = "recycler_binding"
