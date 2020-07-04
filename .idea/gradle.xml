@@ -10,8 +10,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/recycler-binding" />
             <option value="$PROJECT_DIR$/recycler-binding-sample" />
-            <option value="$PROJECT_DIR$/recycler_binding" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
