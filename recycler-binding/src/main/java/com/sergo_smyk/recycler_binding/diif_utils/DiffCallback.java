@@ -8,38 +8,38 @@ import java.util.List;
 
 public abstract class DiffCallback<I> extends DiffUtil.Callback {
 
-    protected List<I> oldList = Collections.emptyList();
-    protected List<I> newList = Collections.emptyList();
+    protected @NonNull List<I> oldList = Collections.emptyList();
+    protected @NonNull List<I> newList = Collections.emptyList();
 
-    public void setNewList(List<I> list) {
+    public void setNewList(@NonNull List<I> list) {
         this.newList = list;
     }
 
-    public void setOldList(List<I> list) {
+    public void setOldList(@NonNull List<I> list) {
         this.oldList = list;
     }
 
     @Override
-    public int getOldListSize() {
+    final public int getOldListSize() {
         return oldList.size();
     }
 
     @Override
-    public int getNewListSize() {
+    final public int getNewListSize() {
         return newList.size();
     }
 
     public abstract boolean areItemsTheSame(@NonNull I oldItem, @NonNull I newItem);
 
     @Override
-    public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+    final public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
         return areItemsTheSame(oldList.get(oldItemPosition), newList.get(newItemPosition));
     }
 
     public abstract boolean areContentsTheSame(@NonNull I oldItem, @NonNull I newItem);
 
     @Override
-    public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+    final public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
         return areContentsTheSame(oldList.get(oldItemPosition), newList.get(newItemPosition));
     }
 }

@@ -19,7 +19,7 @@ public abstract class AbstractBindAdapter<VB extends ViewDataBinding, I>
         implements AdapterWithItems<I> {
 
     @LayoutRes
-    protected int itemLayout;
+    private final int itemLayout;
 
     protected List<I> items = Collections.emptyList();
 
@@ -29,29 +29,38 @@ public abstract class AbstractBindAdapter<VB extends ViewDataBinding, I>
 
     @NonNull
     @Override
-    public BindViewHolder<VB> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BindViewHolder<VB> onCreateViewHolder(@NonNull final ViewGroup parent,
+                                                 int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         VB binding = DataBindingUtil.inflate(inflater, itemLayout, parent, false);
         return new BindViewHolder<>(binding);
     }
 
-    abstract void bindViewHolder(@NonNull VB binding, I item, int position);
+    abstract void bindViewHolder(@NonNull final VB binding,
+                                 @NonNull final I item,
+                                 int position);
 
     @Override
-    public void onBindViewHolder(@NonNull BindViewHolder<VB> holder, int position) {
+    final public void onBindViewHolder(@NonNull final BindViewHolder<VB> holder,
+                                       int position) {
         I item = items.get(position);
         bindViewHolder(holder.getViewBinding(), item, position);
     }
 
-    boolean bindViewHolder(@NonNull VB binding, int position, @NonNull I item, @NonNull List<Object> payloads) {
+    boolean bindViewHolder(@NonNull final VB binding,
+                           @NonNull final I item,
+                           @NonNull List<Object> payloads,
+                           int position) {
         return false;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BindViewHolder<VB> holder, int position, @NonNull List<Object> payloads) {
+    final public void onBindViewHolder(@NonNull BindViewHolder<VB> holder,
+                                       int position,
+                                       @NonNull List<Object> payloads) {
         if (!payloads.isEmpty()) {
             I item = items.get(position);
-            if (bindViewHolder(holder.getViewBinding(), position, item, payloads)) {
+            if (bindViewHolder(holder.getViewBinding(), item, payloads, position)) {
                 return;
             }
         }
